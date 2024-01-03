@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Change reservation{% endblock %} {% block content%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Reservation</title>
+</head>
+<body>
+    <h1>Change Reservation</h1>
+
+    <form method="POST" action="{{ url_for('views.change_reservation') }}">
+        {% for reservation in reservations %}
+            {% if reservation.id == selected_reservation_id %}
+                <div>
+                    <strong>Bungalow:</strong>
+                    <select name="new_bungalow_{{ reservation.id }}">
+                        {% for bungalow in bungalows %}
+                            <option value="{{ bungalow.id }}">{{ bungalow.naam }}</option>
+                        {% endfor %}
+                    </select><br>
+                    <strong>Week:</strong>
+                    <input type="text" name="new_week_{{ reservation.id }}" value="{{ reservation.week }}"><br>
+                    <input type="hidden" name="reservation_id_{{ reservation.id }}" value="{{ reservation.id }}">
+                </div>
+                <hr>
+            {% endif %}
+        {% endfor %}
+        <input type="submit" value="Update Reservation">
+    </form>
+</body>
+{% endblock %}

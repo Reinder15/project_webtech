@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Jouw Reserveringen{% endblock %}
+{% block content%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jouw Reserveringen</title>
+  </head>
+  <body>
+    <h1>Jouw reserveringen</h1>
+        {% for reservation in reservations %}
+            <div class="card">
+              <img src="{{ url_for('static', filename='images/'+ reservation.bungalow.type.fotopath+'.jpg') }}" class="card-img-top" alt="...">
+            
+              <div class="card-body">
+                <h5 class="card-title">{{ reservation.bungalow.naam }}</h5>
+                <p class="card-text">Aantal personen: {{ reservation.bungalow.type.aantal_personen }}<br>
+                  Gereserveerde week: {{reservation.week}}</p>
+                
+                
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown button
+                  </button>
+                  <ul class="dropdown-menu">
+                    {% for bungalow in bungalows %}
+                            <li><a class="dropdown-item" href="{{ bungalow.id }}">{{ bungalow.naam }}</a></li>
+                        {% endfor %}
+                  </ul>
+                </div>
+                
+                <a href="{{ url_for('views.change_bungalow', reservation_id=reservation.id) }}" class="btn btn-primary">Wijzig bungalow</a>
+                <a href="{{ url_for('views.change_week', reservation_id=reservation.id) }}" class="btn btn-primary">Wijzig week</a>
+                <a href="{{ url_for('views.delete_reservation', reservation_id=reservation.id) }}" class="btn btn-danger">Verwijder reservering</a>
+              </div>
+        {% endfor %}
+  </body>
+</html>
+{% endblock %}

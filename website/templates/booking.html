@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %}Booking{% endblock %} {% block content%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking</title>
+  </head>
+  <body>
+    <h1>Booking - {{ bungalow.naam }}</h1>
+    
+    <figure class="figure">
+        <img src="{{ url_for('static', filename='images/'+ bungalow.type.fotopath+'.jpg') }}" class="rounded">
+    </figure>
+
+    <p>Bungalow Details:</p>
+    <ul>
+        <li>Bungalow naam: {{ bungalow.naam }}</li>
+        <li>Aantal personen: {{ bungalow.type.aantal_personen }}</li>
+        <li>Weekprijs: € {{ bungalow.type.weekprijs }}</li>
+    </ul>
+    <form action="{{ url_for('views.create_reservation', id=bungalow.id) }}" method="post">
+        <label for="week">Select Week:</label>
+        <input type="week" id="week" name="week" required>
+        <button type="submit">Create Reservation</button>
+    </form>
+  </body>
+</html>
+{% endblock %}
