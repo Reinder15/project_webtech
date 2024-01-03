@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, abort, flash, redirect, url_for, request
 from flask_login import login_required, current_user
 views = Blueprint('views', __name__)
-from Website.models import db, User, Bungalow, Bungalowtype, Reservation
+from website.models import db, User, Bungalow, Bungalowtype, Reservation
 from flask_sqlalchemy import SQLAlchemy
 
 @views.route('/')

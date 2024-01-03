@@ -1,5 +1,5 @@
-from Website import create_app
-from Website.models import initialize_database
+from website import create_app
+from website.models import initialize_database
 app = create_app()
 
 if __name__ == '__main__':
