@@ -6,7 +6,6 @@ from flask_sqlalchemy import SQLAlchemy
 views = Blueprint('views', __name__)
 
 @views.route('/')
-@login_required
 def home():
     bungalows = Bungalow.query.all()
     return render_template("home.html", user=current_user, bungalows=bungalows)
