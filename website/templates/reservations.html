@@ -8,8 +8,26 @@
     <title>Jouw Reserveringen</title>
   </head>
   <body>
-    <h1>Jouw reserveringen</h1>
 
+    {% if message %}
+    <figure class="text-center">
+      <blockquote class="blockquote">
+        <h1>Jouw reserveringen</h1>
+      </blockquote>
+      <figcaption class="blockquote-footer">
+        Je hebt nog geen reserveringen
+      </figcaption>
+    </figure>
+    {% else %}
+    <figure class="text-center">
+      <blockquote class="blockquote">
+        <h1>Jouw reserveringen</h1>
+      </blockquote>
+      <figcaption class="blockquote-footer">
+        Hieronder vind je al je reserveringen
+      </figcaption>
+    </figure>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
         {% for reservation in reservations %}
             <div class="card">
               <img src="{{ url_for('static', filename='images/'+ reservation.bungalow.type.fotopath+'.jpg') }}" class="card-img-top" alt="...">
@@ -23,7 +41,7 @@
                     Wijzig bungalow
                   </button>
                   
-                  <!-- Modal -->
+                  
                   <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
@@ -54,12 +72,12 @@
                   </div>
                   
 
-                <!-- Button trigger modal -->
+                
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   Wijzig week
                 </button>
                 
-                <!-- Modal -->
+                
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -85,7 +103,9 @@
                   
                 <a href="{{ url_for('views.delete_reservation', reservation_id=reservation.id) }}" class="btn btn-danger">Verwijder reservering</a>
               </div>
+            </div>
         {% endfor %}
+      {% endif %}
   </body>
 </html>
 {% endblock %}

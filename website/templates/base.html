@@ -17,39 +17,29 @@
   />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-secondary" data-bs-theme="dark">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="/">Zee en Duin</a>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" id="home" href="/">Home</a>
-             </li>
-            <li class="nav-item">
-              <a class="nav-link" id="reservations" href="{{ url_for('views.reservations') }}">Reserveringen</a>
-             </li>
-            <li class="nav-item">
-              <a class="nav-link" id="logout" href="{{ url_for('auth.logout') }}">Logout</a>
-             </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link active" id="login" href="login">Login</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" id="sign-up" href="sign-up">Sign-up</a>
-            </li>
-
-
-            {% endif %}
-            
-          </ul>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0866a8;">
+      <div class="container">
+          <a class="navbar-brand" href="/">Zee en Duin</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  {% if user.is_authenticated %}
+                      <li class="nav-item">
+                          <a class="nav-link" id="home" href="/">Home</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" id="reservations" href="{{ url_for('views.reservations') }}">Reserveringen</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" id="logout" href="{{ url_for('auth.logout') }}">Logout</a>
+                      </li>
+                  {% endif %}
+              </ul>
+          </div>
       </div>
-    </nav>
-
+  </nav>
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       {% for category, message in messages %}

@@ -1,4 +1,5 @@
-{% extends "base.html" %} {% block title %}Booking{% endblock %} {% block content%}
+{% extends "base.html" %} {% block title %}Booking{% endblock %} {% block
+content%}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,21 +8,28 @@
   </head>
   <body>
     <h1>Booking - {{ bungalow.naam }}</h1>
-    
+
     <figure class="figure">
-        <img src="{{ url_for('static', filename='images/'+ bungalow.type.fotopath+'.jpg') }}" class="rounded">
+      <img
+        src="{{ url_for('static', filename='images/'+ bungalow.type.fotopath+'.jpg') }}"
+        class="rounded"
+      />
     </figure>
 
     <p>Bungalow Details:</p>
     <ul>
-        <li>Bungalow naam: {{ bungalow.naam }}</li>
-        <li>Aantal personen: {{ bungalow.type.aantal_personen }}</li>
-        <li>Weekprijs: € {{ bungalow.type.weekprijs }}</li>
+      <li>Bungalow naam: {{ bungalow.naam }}</li>
+      <li>Aantal personen: {{ bungalow.type.aantal_personen }}</li>
+      <li>Weekprijs: € {{ bungalow.type.weekprijs }}</li>
     </ul>
-    <form action="{{ url_for('views.create_reservation', id=bungalow.id) }}" method="post">
-        <label for="week">Select Week:</label>
-        <input type="week" id="week" name="week" required>
-        <button type="submit">Create Reservation</button>
+    <form
+      action="{{ url_for('views.create_reservation', id=bungalow.id) }}"
+      method="post"
+    >
+      <label for="week">Select Week:</label>
+      <input type="week" id="week" name="week" required /> <br />
+      <br />
+      <button type="submit" class="btn btn-primary">Create Reservation</button>
     </form>
   </body>
 </html>

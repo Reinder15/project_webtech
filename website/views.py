@@ -36,14 +36,14 @@ def create_reservation(id):
     return redirect(url_for('views.booking', id=id))
 
 @views.route('/reservations/')
-#TODO /reservation/ werkt, maar kan niet vanaf deze pagina uitloggen. 
 @login_required
 def reservations():
     user_reservations = Reservation.query.filter_by(user_id=current_user.id).all()
     bungalows = Bungalow.query.all()
-    if user_reservations == None:
-        #TODO Implementeer onderstaande
-        return 'Je hebt nog geen reserveringen'
+    
+    if not user_reservations: 
+        message = 'Je hebt nog geen reserveringen'
+        return render_template('reservations.html', user=current_user, message=message, bungalows=bungalows)
     else:
         return render_template('reservations.html', user=current_user, reservations=user_reservations, bungalows=bungalows)
 
