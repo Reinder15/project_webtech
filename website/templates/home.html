@@ -16,7 +16,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ bungalow.naam }}</h5>
           <p class="card-text">Aantal personen: {{ bungalow.type.aantal_personen }}<br>
-            <p class="card-text">Weekprijs: {{ bungalow.type.weekprijs }}</p>
+            <p class="card-text">Weekprijs: €{{ bungalow.type.weekprijs }}</p>
             <a href="{{ url_for('views.booking', id=bungalow.id) }}"class="btn btn-primary">Reserveren</a>
           </div>
       {% endfor %}

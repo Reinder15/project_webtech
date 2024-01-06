@@ -18,7 +18,7 @@ def create_app():
     from .views import views
     from .auth import auth
 
-    app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(views, name='booking', url_prefix='/booking/int(id)')
     app.register_blueprint(views, name='reservations', url_prefix='/reservations/')
