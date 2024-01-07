@@ -12,13 +12,13 @@ class Bungalow(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     naam = db.Column(db.String(255), unique=True, nullable=False)
     type_id = db.Column(db.Integer, db.ForeignKey('bungalowtype.id'), nullable=False)
+    fotopath = db.Column(db.String)
     reservations = db.relationship('Reservation', backref='bungalow', lazy=True)
 
 class Bungalowtype(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     aantal_personen = db.Column(db.Integer, unique=True, nullable=False)
     weekprijs = db.Column(db.Float, nullable=False)
-    fotopath = db.Column(db.String)
     bungalows = db.relationship('Bungalow', backref='type', lazy=True)
 
 class Reservation(db.Model):
@@ -29,24 +29,24 @@ class Reservation(db.Model):
 
 
 predefined_bungalowtypes = [
-    {'aantal_personen': 4, 'weekprijs': 1600, 'fotopath': 'bungalow_4_persoons'},
-    {'aantal_personen': 6, 'weekprijs': 2000, 'fotopath': 'bungalow_6_persoons'},
-    {'aantal_personen': 8, 'weekprijs': 2400, 'fotopath': 'bungalow_8_persoons'},
+    {'aantal_personen': 4, 'weekprijs': 1600},
+    {'aantal_personen': 6, 'weekprijs': 2000},
+    {'aantal_personen': 8, 'weekprijs': 2400},
 ]
 
 predefined_bungalows = [
-    {'naam': 'Duif', 'type_id': 1},
-    {'naam': 'Pauw', 'type_id': 1},
-    {'naam': 'Kip', 'type_id': 1},
-    {'naam': 'Kalkoen', 'type_id': 1},
-    {'naam': 'Kraai', 'type_id': 2},
-    {'naam': 'Ekster', 'type_id': 2},
-    {'naam': 'Kauw', 'type_id': 2},
-    {'naam': 'Kievit', 'type_id': 2},
-    {'naam': 'Zwaan', 'type_id': 3},
-    {'naam': 'Flamingo', 'type_id': 3},
-    {'naam': 'Pinguin', 'type_id': 3},
-    {'naam': 'Struisvogel', 'type_id': 3},
+    {'naam': 'Duif', 'type_id': 1, 'fotopath': 'duif'},
+    {'naam': 'Pauw', 'type_id': 1, 'fotopath': 'pauw'},
+    {'naam': 'Kip', 'type_id': 1, 'fotopath': 'kip'},
+    {'naam': 'Kalkoen', 'type_id': 1, 'fotopath': 'kalkoen'},
+    {'naam': 'Kraai', 'type_id': 2, 'fotopath': 'kraai'},
+    {'naam': 'Ekster', 'type_id': 2, 'fotopath': 'ekster'},
+    {'naam': 'Kauw', 'type_id': 2, 'fotopath': 'kauw'},
+    {'naam': 'Kievit', 'type_id': 2, 'fotopath': 'kievit'},
+    {'naam': 'Zwaan', 'type_id': 3, 'fotopath': 'zwaan'},
+    {'naam': 'Flamingo', 'type_id': 3, 'fotopath': 'flamingo'},
+    {'naam': 'Pinguin', 'type_id': 3, 'fotopath': 'pinguin'},
+    {'naam': 'Struisvogel', 'type_id': 3, 'fotopath': 'struisvogel'},
 ]
 
 def add_bungalowTypes():
@@ -54,7 +54,7 @@ def add_bungalowTypes():
         existing_bungalowtype = Bungalowtype.query.filter_by(aantal_personen=bungalowtype_data['aantal_personen']).first()
 
         if not existing_bungalowtype:
-            new_bungalowtype = Bungalowtype(aantal_personen=bungalowtype_data['aantal_personen'], weekprijs=bungalowtype_data['weekprijs'], fotopath=bungalowtype_data['fotopath'])
+            new_bungalowtype = Bungalowtype(aantal_personen=bungalowtype_data['aantal_personen'], weekprijs=bungalowtype_data['weekprijs'])
             db.session.add(new_bungalowtype)
     
     db.session.commit()
@@ -64,7 +64,7 @@ def add_bungalows():
         existing_bungalow = Bungalow.query.filter_by(naam=bungalow_data['naam']).first()
 
         if not existing_bungalow:
-            new_bungalow = Bungalow(naam=bungalow_data['naam'], type_id=bungalow_data['type_id'])
+            new_bungalow = Bungalow(naam=bungalow_data['naam'], type_id=bungalow_data['type_id'], fotopath=bungalow_data['fotopath'])
             db.session.add(new_bungalow)
     
     db.session.commit()

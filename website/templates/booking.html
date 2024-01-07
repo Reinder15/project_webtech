@@ -14,7 +14,7 @@ content%}
             <div class="col-md-6">
                 <figure class="figure">
                     <img
-                        src="{{ url_for('static', filename='images/'+ bungalow.type.fotopath+'.jpg') }}"
+                        src="{{ url_for('static', filename='images/'+ bungalow.fotopath+'.jpg') }}"
                         class="img-fluid rounded"
                         alt="{{ bungalow.naam }} Image"
                     />
@@ -37,7 +37,7 @@ content%}
         >
             <div class="mb-3">
                 <label for="week" class="form-label">Select Week:</label>
-                <input type="week" id="week" name="week" class="form-control" required />
+                <input type="week" id="week" name="week" class="form-control" min="2024-W01" max="2024-W52" required />
             </div>
             <button type="submit" class="btn btn-primary">Create Reservation</button>
         </form>
