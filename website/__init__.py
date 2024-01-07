@@ -20,9 +20,6 @@ def create_app():
 
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(views, url_prefix='/')
-    app.register_blueprint(views, name='booking', url_prefix='/booking/int(id)')
-    app.register_blueprint(views, name='reservations', url_prefix='/reservations/')
-    app.register_blueprint(views, name='change_reservation.html', url_prefix='/change_reservation')
 
     from .models import User, Bungalow, Bungalowtype, Reservation
 

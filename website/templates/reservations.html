@@ -30,7 +30,7 @@
     <div class="row row-cols-1 row-cols-md-2 g-4">
         {% for reservation in reservations %}
             <div class="card">
-              <img src="{{ url_for('static', filename='images/'+ reservation.bungalow.type.fotopath+'.jpg') }}" class="card-img-top" alt="...">
+              <img src="{{ url_for('static', filename='images/'+ reservation.bungalow.type.fotopath+'.jpg') }}" class="card-img-top img-fluid" style="object-fit: cover;">
             
               <div class="card-body">
                 <h5 class="card-title">{{ reservation.bungalow.naam }}</h5>
