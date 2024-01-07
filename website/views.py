@@ -2,19 +2,21 @@ from flask import Blueprint, render_template, abort, flash, redirect, url_for, r
 from flask_login import login_required, current_user
 from website.models import db, User, Bungalow, Bungalowtype, Reservation
 from flask_sqlalchemy import SQLAlchemy
+from random import shuffle
 
 views = Blueprint('views', __name__)
 
 @views.route('/')
 def home():
     bungalows = Bungalow.query.all()
+    shuffle(bungalows)
     return render_template("home.html", user=current_user, bungalows=bungalows)
 
 @views.route('/booking/<int:id>')
 @login_required
 def booking(id):
     bungalow = Bungalow.query.get(id)
-
+    
     if bungalow:
         return render_template('booking.html', user=current_user, bungalow=bungalow)
     else:

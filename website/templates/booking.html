@@ -1,5 +1,8 @@
-{% extends "base.html" %} {% block title %}Booking{% endblock %} {% block
-content%}
+{% extends "base.html" %}
+
+{% block title %}Booking{% endblock %}
+
+{% block content %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,39 +11,38 @@ content%}
   </head>
   <body class="bg-light">
     <div class="container mt-5">
-        <h1 class="mb-4">Booking - {{ bungalow.naam }}</h1>
-
-        <div class="row">
-            <div class="col-md-6">
-                <figure class="figure">
-                    <img
-                        src="{{ url_for('static', filename='images/'+ bungalow.fotopath+'.jpg') }}"
-                        class="img-fluid rounded"
-                        alt="{{ bungalow.naam }} Image"
-                    />
-                </figure>
-            </div>
-            <div class="col-md-6">
-                <h4>Bungalow Details:</h4>
-                <ul class="list-group">
-                    <li class="list-group-item">Bungalow naam: {{ bungalow.naam }}</li>
-                    <li class="list-group-item">Aantal personen: {{ bungalow.type.aantal_personen }}</li>
-                    <li class="list-group-item">Weekprijs: € {{ bungalow.type.weekprijs }}</li>
-                </ul>
-            </div>
+      <h1 class="mb-4">Boeking - {{ bungalow.naam }}</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <figure class="figure">
+            <img
+              src="{{ url_for('static', filename='images/'+ bungalow.fotopath+'.jpg') }}"
+              class="img-fluid rounded"
+              alt="{{ bungalow.naam }} Image"
+            />
+          </figure>
         </div>
+        <div class="col-md-6">
+          <h4>Bungalow Details:</h4>
+          <ul class="list-group">
+            <li class="list-group-item">Bungalow naam: {{ bungalow.naam }}</li>
+            <li class="list-group-item">Aantal personen: {{ bungalow.type.aantal_personen }}</li>
+            <li class="list-group-item">Weekprijs: € {{ bungalow.type.weekprijs }}</li>
+          </ul>
+        </div>
+      </div>
 
-        <form
-            action="{{ url_for('views.create_reservation', id=bungalow.id) }}"
-            method="post"
-            class="mt-4"
-        >
-            <div class="mb-3">
-                <label for="week" class="form-label">Select Week:</label>
-                <input type="week" id="week" name="week" class="form-control" min="2024-W01" max="2024-W52" required />
-            </div>
-            <button type="submit" class="btn btn-primary">Create Reservation</button>
-        </form>
+      <form
+        action="{{ url_for('views.create_reservation', id=bungalow.id) }}"
+        method="post"
+        class="mt-4"
+      >
+        <div class="mb-3">
+          <label for="week" class="form-label">Select Week:</label>
+          <input type="week" id="week" name="week" class="form-control" min="2024-W01" max="2024-W52" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Opslaan</button>
+      </form>
     </div>
   </body>
 </html>

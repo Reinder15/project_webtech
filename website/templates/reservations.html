@@ -46,7 +46,7 @@
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="exampleModalLabel">Change bungalow</h1>
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Wijzig bungalow</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -54,17 +54,17 @@
                             <select class="form-select" aria-label="Default select example" name="bungalow">
                               {% for bungalow in bungalows %}
                                 {% if reservation.bungalow.id == bungalow.id %}
-                                  <option value="{{ bungalow.id }}" selected>{{ bungalow.naam }}</option>
+                                  <option value="{{ bungalow.id }}" selected>{{ bungalow.naam }} {{bungalow.type.aantal_personen}}-persoons</option>
                                 {% else %}
-                                  <option value="{{ bungalow.id }}">{{ bungalow.naam }}</option>
+                                  <option value="{{ bungalow.id }}">{{ bungalow.naam }} {{bungalow.type.aantal_personen}}-persoons</option>
                                 {% endif %}
                               {% endfor %}
                             </select>
                             
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary">Save changes</button>
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sluiten</button>
+                          <button type="submit" class="btn btn-primary">Wijziging opslaan</button>
                         </form>
                         </div>
                       </div>
@@ -82,18 +82,18 @@
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Change week</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Wijzig week</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         <form action="{{ url_for('views.change_week', reservation_id=reservation.id) }}" method="post">
-                          <label for="week">Select Week:</label>
+                          <label for="week">Selecteer Week:</label>
                           <input type="week" id="week" name="week" required>
                           
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sluiten</button>
+                        <button type="submit" class="btn btn-primary">Wijziging opslaan</button>
                       </form>
                       </div>
                     </div>
