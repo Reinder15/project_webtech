@@ -1,0 +1,8 @@
+.nav-link {
+    outline: 2px solid rgb(118, 160, 215);
+    border-radius: 10px;
+    padding: 8px 12px;
+}
+.navbar-nav .nav-item {
+    margin-right: 10px; 
+}
