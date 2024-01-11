@@ -6,3 +6,19 @@
 .navbar-nav .nav-item {
     margin-right: 10px; 
 }
+
+.jumbotron {
+    background-color: #3498db;  /* Achtergrondkleur aanpassen naar jouw wens */
+    height: 250px;
+
+}
+
+.logo {
+    max-width: 100px;  /* Maximale breedte van het logo aanpassen naar jouw wens */
+    max-height: 100px;  /* Maximale hoogte van het logo aanpassen naar jouw wens */
+}
+
+.banner-text {
+    color: #ffffff;  /* Tekstkleur aanpassen naar jouw wens */
+    margin-top: 10px;  /* Ruimte boven de tekst */
+}

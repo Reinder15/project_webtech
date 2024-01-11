@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beschikbare bungalows</title>
+  </head>
+  <body>
+    <figure class="text-center">
+      <blockquote class="blockquote">
+        <h1>Beschikbare bungalows</h1>
+      </blockquote>
+      <figcaption class="blockquote-footer">
+        Selecteer de gewenste week om beschikbaarheid te controleren
+      </figcaption>
+    </figure>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      {% for bungalow in bungalows %}
+      <div class="col">
+        <div class="card">
+          <img
+            src="{{ url_for('static', filename='images/'+ bungalow.fotopath+'.jpg') }}"
+            class="card-img-top"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ bungalow.naam }}</h5>
+            <p class="card-text">
+              Aantal personen: {{ bungalow.type.aantal_personen }}
+            </p>
+            <p class="card-text">Weekprijs: €{{ bungalow.type.weekprijs }}</p>
+            <a
+              href="{{ url_for('views.booking', id=bungalow.id) }}"
+              class="btn btn-primary"
+              >Reserveren</a
+            >
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
+{% endblock %}

@@ -8,10 +8,13 @@ views = Blueprint('views', __name__)
 
 @views.route('/')
 def home():
-    bungalows = Bungalow.query.all()
-    shuffle(bungalows)
-    number_of_reservations = len(Reservation.query.filter_by(user_id=current_user.id).all())
-    return render_template("home.html", user=current_user, bungalows=bungalows, number_of_reservations=number_of_reservations)
+    user = current_user if current_user.is_authenticated else None
+
+    if user:
+        number_of_reservations = len(Reservation.query.filter_by(user_id=current_user.id).all())
+        return render_template('home.html', user=current_user, number_of_reservations=number_of_reservations)
+    
+    return render_template('home.html', user=current_user)
 
 @views.route('/booking/<int:id>')
 @login_required
@@ -78,6 +81,7 @@ def change_bungalow(reservation_id):
     return redirect(url_for('views.reservations'))
 
 @views.route('/delete_reservation/<int:reservation_id>', methods=['GET'])
+@login_required
 def delete_reservation(reservation_id):
     reservation= Reservation.query.get(reservation_id)
     db.session.delete(reservation)
@@ -86,3 +90,15 @@ def delete_reservation(reservation_id):
     return redirect(url_for('views.reservations'))
 
 
+@views.route('/bungalows')
+def beschikbare_bungalows():
+    bungalows = Bungalow.query.all()
+    shuffle(bungalows)
+    user = current_user if current_user.is_authenticated else None
+
+    if user:
+        number_of_reservations = len(Reservation.query.filter_by(user_id=current_user.id).all())
+        return render_template('bungalows.html', user=current_user, bungalows=bungalows, number_of_reservations=number_of_reservations)
+    
+    return render_template("bungalows.html", user=current_user, bungalows=bungalows)
+    
