@@ -63,7 +63,7 @@
                             
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sluiten</button>
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Terug</button>
                           <button type="submit" class="btn btn-primary">Wijziging opslaan</button>
                         </form>
                         </div>
@@ -92,16 +92,35 @@
                           
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sluiten</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Terug</button>
                         <button type="submit" class="btn btn-primary">Wijziging opslaan</button>
                       </form>
                       </div>
                     </div>
                   </div>
                 </div>
-                  
-                  
-                <a href="{{ url_for('views.delete_reservation', reservation_id=reservation.id) }}" class="btn btn-danger">Verwijder reservering</a>
+                
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                  Annuleer reservering
+              </button>
+              
+              <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="confirmDeleteModalLabel">Bevestig annulering</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              Weet je zeker dat je je reservering wil annuleren?
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Terug</button>
+                              <a href="{{ url_for('views.delete_reservation', reservation_id=reservation.id) }}" class="btn btn-danger">Annuleer reservering</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
               </div>
             </div>
         {% endfor %}
