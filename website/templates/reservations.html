@@ -29,6 +29,7 @@
     </figure>
     <div class="row row-cols-1 row-cols-md-2 g-4">
         {% for reservation in reservations %}
+        <div class="col">
             <div class="card">
               <img src="{{ url_for('static', filename='images/'+ reservation.bungalow.fotopath+'.jpg') }}" class="object-fit-fill border rounded" style="object-fit: cover;">
             
@@ -123,6 +124,7 @@
               </div>
               </div>
             </div>
+          </div>
         {% endfor %}
       {% endif %}
   </body>

@@ -1,5 +1,5 @@
 .nav-link {
-    outline: 2px solid rgb(118, 160, 215);
+    outline: 2px solid rgb(76, 122, 221);
     border-radius: 10px;
     padding: 8px 12px;
 }
@@ -19,4 +19,8 @@
 .banner-text {
     color: #ffffff;  /* Tekstkleur aanpassen naar jouw wens */
     margin-top: 10px;  /* Ruimte boven de tekst */
+}
+
+.blockquote-footer {
+    color: white;
 }
