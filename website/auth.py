@@ -15,13 +15,13 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in succesfully!', category='succes')
+                flash('Je bent ingelogd!', category='succes')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
-                flash('Incorrect password, try again.', category='error')
+                flash('Wachtwoord onjuist, probeer opnieuw.', category='error')
         else:
-            flash('Email does not exist.', category='error')        
+            flash('Dit emailadres wordt niet herkend', category='error')        
 
     return render_template("login.html", user=current_user)
 
@@ -40,20 +40,20 @@ def sign_up():
 
         user = User.query.filter_by(email=email).first()
         if user:
-            flash('This email is already in use.', category='error')
+            flash('Dit emailadres is al in gebruik', category='error')
     
         elif len(email) < 4:
-            flash("Email must be longer than 3 characters", category='error')
+            flash("Emailadres moet minstens 3 karakters bevatten", category='error')
         elif password1 != password2:
-            flash("Passwords don/'t match", category='error')
+            flash("Wachtwoorden komen niet overeen", category='error')
         elif len(password1) <= 7:
-            flash("Password must be at least 8 characters", category='error')
+            flash("Wachtwoord moet minstens 8 karakters bevatten", category='error')
         else:
             new_user = User(email=email, password=generate_password_hash(password1, method='pbkdf2:sha1'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash("Account created!", category='succes')
+            flash("Account succesvol aangemaakt!", category='succes')
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)

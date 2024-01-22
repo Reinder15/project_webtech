@@ -24,19 +24,19 @@ def booking(id):
     if bungalow:
         return render_template('booking.html', user=current_user, bungalow=bungalow, number_of_reservations=number_of_reservations)
     else:
-        abort(404, description="Bungalow not found")
+        abort(404, description="Bungalow niet gevonden")
 
 @views.route('/booking/<int:id>', methods=['POST'])
 @login_required
 def create_reservation(id):
     existing_reservation = Reservation.query.filter_by(bungalow_id=id, week=request.form.get('week')).first()
     if existing_reservation:
-        flash('This bungalow is already reservered for this week', category='error')
+        flash('Deze bungalow is al gereserveerd voor deze week', category='error')
     else:
         reservation = Reservation(user_id=current_user.id, bungalow_id=id, week=request.form.get('week'))
         db.session.add(reservation)
         db.session.commit()
-        flash('Reservation created successfully.', category='succes')
+        flash('Reservering succesvol!', category='succes')
 
     return redirect(url_for('views.booking', id=id))
 
@@ -60,23 +60,27 @@ def change_week(reservation_id):
     if existing_reservation:
         existing_reservation.week = request.form.get('week')
         db.session.commit()
-        flash('Reservation changed successfully.', category='success')
+        flash('Reservering succesvol gewijzigd', category='success')
     else:
-        flash('Reservation not found.', category='error')
+        flash('Reservering niet gevonden', category='error')
 
     return redirect(url_for('views.reservations'))
 
 @views.route('/change_bungalow/<int:reservation_id>', methods=['POST'])
 @login_required
 def change_bungalow(reservation_id):
-    existing_reservation = Reservation.query.filter_by(user_id=current_user.id, id=reservation_id).first()
+    #TODO fix dit
+    existing_reservation = Reservation.query.filter(
+        Reservation.user_id == current_user.id,
+        Reservation.id == reservation_id
+    ).first()
 
     if existing_reservation:
         existing_reservation.bungalow_id = request.form.get('bungalow')
         db.session.commit()
-        flash('Reservation changed successfully.', category='success')
+        flash('Reservering succesvol gewijzigd!', category='success')
     else:
-        flash('Reservation not found.', category='error')
+        flash('Reservering niet gevonden', category='error')
 
     return redirect(url_for('views.reservations'))
 
@@ -86,7 +90,7 @@ def delete_reservation(reservation_id):
     reservation= Reservation.query.get(reservation_id)
     db.session.delete(reservation)
     db.session.commit()
-    flash('Your reservation was succesfully deleted!', category='succes')
+    flash('Je reservering is succesvol geannuleerd', category='succes')
     return redirect(url_for('views.reservations'))
 
 

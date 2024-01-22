@@ -12,15 +12,19 @@
 }
 
 .logo {
-    max-width: 100px;  /* Maximale breedte van het logo aanpassen naar jouw wens */
-    max-height: 100px;  /* Maximale hoogte van het logo aanpassen naar jouw wens */
+    max-width: 100px;  
+    max-height: 100px;  
 }
 
 .banner-text {
-    color: #ffffff;  /* Tekstkleur aanpassen naar jouw wens */
-    margin-top: 10px;  /* Ruimte boven de tekst */
+    color: #ffffff;  
+    margin-top: 10px;  
 }
 
 .blockquote-footer {
     color: white;
+}
+
+.display-5 {
+    font-size: 8;
 }
