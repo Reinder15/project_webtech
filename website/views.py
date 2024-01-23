@@ -58,9 +58,20 @@ def change_week(reservation_id):
     existing_reservation = Reservation.query.filter_by(user_id=current_user.id, id=reservation_id).first()
 
     if existing_reservation:
-        existing_reservation.week = request.form.get('week')
-        db.session.commit()
-        flash('Reservering succesvol gewijzigd', category='success')
+        new_week = request.form.get('week')
+
+        conflicting_reservation = Reservation.query.filter_by(
+            user_id=current_user.id,
+            week=new_week,
+            bungalow_id=existing_reservation.bungalow_id
+        ).first()
+
+        if conflicting_reservation:
+            flash('Deze bungalow is al gereserveerd voor deze week. Kies een andere week.', category='error')
+        else:
+            existing_reservation.week = new_week
+            db.session.commit()
+            flash('Reservering succesvol gewijzigd', category='success')
     else:
         flash('Reservering niet gevonden', category='error')
 
@@ -69,16 +80,26 @@ def change_week(reservation_id):
 @views.route('/change_bungalow/<int:reservation_id>', methods=['POST'])
 @login_required
 def change_bungalow(reservation_id):
-    #TODO fix dit
     existing_reservation = Reservation.query.filter(
         Reservation.user_id == current_user.id,
         Reservation.id == reservation_id
     ).first()
 
     if existing_reservation:
-        existing_reservation.bungalow_id = request.form.get('bungalow')
-        db.session.commit()
-        flash('Reservering succesvol gewijzigd!', category='success')
+        new_bungalow_id = request.form.get('bungalow')
+
+        conflicting_reservation = Reservation.query.filter_by(
+            user_id=current_user.id,
+            bungalow_id=new_bungalow_id,
+            week=existing_reservation.week
+        ).first()
+
+        if conflicting_reservation:
+            flash('Deze bungalow is al gereserveerd voor deze week. Kies een andere week.', category='error')
+        else:
+            existing_reservation.bungalow_id = new_bungalow_id
+            db.session.commit()
+            flash('Reservering succesvol gewijzigd!', category='success')
     else:
         flash('Reservering niet gevonden', category='error')
 
