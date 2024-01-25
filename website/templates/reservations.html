@@ -38,12 +38,12 @@
                 <p class="card-text">Aantal personen: {{ reservation.bungalow.type.aantal_personen }}<br>
                   Gereserveerde week: {{reservation.week}}</p>
                   
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1-{{ reservation.id }}">
                     Wijzig bungalow
                   </button>
                   
                   
-                  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="exampleModal1-{{ reservation.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -74,12 +74,12 @@
                   
 
                 
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2-{{ reservation.id }}">
                   Wijzig week
                 </button>
                 
                 
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="exampleModal2-{{ reservation.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -88,6 +88,7 @@
                       </div>
                       <div class="modal-body">
                         <form action="{{ url_for('views.change_week', reservation_id=reservation.id) }}" method="post">
+                          <input type="hidden" name="reservation_id" value="{{ reservation.id }}">
                           <label for="week">Selecteer Week:</label>
                           <input type="week" id="week" name="week" required>
                           
@@ -101,11 +102,11 @@
                   </div>
                 </div>
                 
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal-{{ reservation.id }}">
                   Annuleer reservering
               </button>
               
-              <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+              <div class="modal fade" id="confirmDeleteModal-{{ reservation.id }}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                       <div class="modal-content">
                           <div class="modal-header">
