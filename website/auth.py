@@ -43,7 +43,7 @@ def sign_up():
             flash('Dit emailadres is al in gebruik', category='error')
     
         elif len(email) < 4:
-            flash("Emailadres moet minstens 3 karakters bevatten", category='error')
+            flash("Emailadres moet minstens 4 karakters bevatten", category='error')
         elif password1 != password2:
             flash("Wachtwoorden komen niet overeen", category='error')
         elif len(password1) <= 7:
